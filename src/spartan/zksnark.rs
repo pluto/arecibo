@@ -506,13 +506,9 @@ where
     let comm_eval_Z = {
       let eval_X = {
         // constant term
-        let mut poly_X = vec![(0, U.u)];
-        //remaining inputs
-        poly_X.extend(
-          (0..U.X.len())
-            .map(|i| (i + 1, U.X[i]))
-            .collect::<Vec<(usize, E::Scalar)>>(),
-        );
+        let mut poly_X = vec![U.u];
+        let mut u_x = U.X.clone();
+        poly_X.append(&mut u_x);
         SparsePolynomial::new((vk.S.num_vars as f64).log2() as usize, poly_X).evaluate(&r_y[1..])
       };
 
